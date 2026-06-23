@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师任课成绩查询</title>
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; margin: 0; padding: 20px; background: #f5f5f5; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #2c3e50; margin-bottom: 20px; }
+        .nav a { color: #3498db; text-decoration: none; }
+        .card { background: #fff; border-radius: 6px; padding: 20px; margin-top: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .info { padding: 15px; background: #f8f9fa; border-radius: 4px; margin-bottom: 20px; }
+        .info p { margin: 8px 0; color: #555; }
+        .info b { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f8f9fa; color: #2c3e50; font-weight: normal; padding: 12px; text-align: center; border-bottom: 2px solid #dee2e6; }
+        td { padding: 12px; text-align: center; border-bottom: 1px solid #eee; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>教师任课成绩查询</h1>
+        <div class="nav"><a href="/teacher/list">← 返回教师列表</a></div>
+        <div class="card">
+            <div class="info">
+                <p>工号: <b th:text="${teacher.teacherId}"></b></p>
+                <p>性别: <b th:text="${teacher.gender}"></b></p>
+                <p>任课课程: 
+                    <b><span th:each="course,stat : ${teacher.courses}">
+                        <span th:text="${course.courseName}"></span><span th:if="${!stat.last}">, </span>
+                    </span></b>
+                </p>
+            </div>
+            <table>
+                <tr><th>学生姓名</th><th>课程名</th><th>成绩</th></tr>
+                <tr th:each="score : ${scores}">
+                    <td th:text="${score.student.name}"></td>
+                    <td th:text="${score.course.courseName}"></td>
+                    <td th:text="${score.score}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

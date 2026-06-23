@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理</title>
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; margin: 0; padding: 20px; background: #f5f5f5; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #2c3e50; margin-bottom: 20px; }
+        .nav { margin-bottom: 20px; }
+        .nav a { color: #3498db; text-decoration: none; margin-right: 20px; }
+        .nav a:hover { text-decoration: underline; }
+        .card { background: #fff; border-radius: 6px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f8f9fa; color: #2c3e50; font-weight: normal; padding: 12px; text-align: center; border-bottom: 2px solid #dee2e6; }
+        td { padding: 12px; text-align: center; border-bottom: 1px solid #eee; color: #555; }
+        tr:hover { background: #f8f9fa; }
+        .btn { color: #3498db; text-decoration: none; margin-right: 10px; }
+        .btn:hover { text-decoration: underline; }
+        .btn-danger { color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>学生管理</h1>
+        <div class="nav">
+            <a href="/">← 返回首页</a>
+            <a href="/student/add">+ 新增学生</a>
+        </div>
+        <div class="card">
+            <table>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>出生年月日</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.studentId}"></td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${#dates.format(student.birthday, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${student.gender}"></td>
+                    <td>
+                        <a class="btn" th:href="@{'/student/scores/' + ${student.studentId}}">查询成绩</a>
+                        <a class="btn btn-danger" th:href="@{'/student/delete/' + ${student.studentId}}" onclick="return confirm('确定删除?')">删除</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

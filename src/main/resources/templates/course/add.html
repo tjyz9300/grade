@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增课程</title>
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; margin: 0; padding: 20px; background: #f5f5f5; color: #333; }
+        .container { max-width: 500px; margin: 0 auto; }
+        h1 { color: #2c3e50; margin-bottom: 20px; }
+        .card { background: #fff; border-radius: 6px; padding: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #2c3e50; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+        input:focus, select:focus { border-color: #3498db; outline: none; }
+        button { width: 100%; padding: 12px; background: #3498db; color: #fff; border: none; border-radius: 4px; font-size: 15px; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        .back { display: block; text-align: center; margin-top: 20px; color: #3498db; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>新增课程</h1>
+        <div class="card">
+            <form action="/course/save" method="post">
+                <div class="form-group">
+                    <label>课程号</label>
+                    <input type="text" name="courseId" required placeholder="例如: C004">
+                </div>
+                <div class="form-group">
+                    <label>课程名</label>
+                    <input type="text" name="courseName" required placeholder="请输入课程名">
+                </div>
+                <div class="form-group">
+                    <label>任课教师</label>
+                    <select name="teacherId" required>
+                        <option value="">-- 请选择 --</option>
+                        <option th:each="teacher : ${teachers}" th:value="${teacher.teacherId}" th:text="${teacher.teacherId}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>学分</label>
+                    <input type="number" name="credit" min="1" max="10" required placeholder="1-10">
+                </div>
+                <button type="submit">保存</button>
+            </form>
+        </div>
+        <a class="back" href="/course/list">← 返回列表</a>
+    </div>
+</body>
+</html>

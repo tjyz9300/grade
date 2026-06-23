@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增教师</title>
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; margin: 0; padding: 20px; background: #f5f5f5; color: #333; }
+        .container { max-width: 500px; margin: 0 auto; }
+        h1 { color: #2c3e50; margin-bottom: 20px; }
+        .card { background: #fff; border-radius: 6px; padding: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #2c3e50; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+        input:focus, select:focus { border-color: #3498db; outline: none; }
+        button { width: 100%; padding: 12px; background: #3498db; color: #fff; border: none; border-radius: 4px; font-size: 15px; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        .back { display: block; text-align: center; margin-top: 20px; color: #3498db; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>新增教师</h1>
+        <div class="card">
+            <form action="/teacher/save" method="post">
+                <div class="form-group">
+                    <label>工号</label>
+                    <input type="text" name="teacherId" required placeholder="例如: T003">
+                </div>
+                <div class="form-group">
+                    <label>性别</label>
+                    <select name="gender">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+                <button type="submit">保存</button>
+            </form>
+        </div>
+        <a class="back" href="/teacher/list">← 返回列表</a>
+    </div>
+</body>
+</html>
